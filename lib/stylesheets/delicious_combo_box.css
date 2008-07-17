@@ -1,0 +1,27 @@
+.deliciousComboBox input {
+  background: url("/images/arrow_down.gif") no-repeat right;
+  border: 1px solid #777;
+}
+.deliciousComboList {
+  background: #FFF;
+  border: 1px solid #777;
+  height: auto;
+  width: auto;
+}
+
+.deliciousComboList ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.deliciousComboList li {
+  list-style-type: none;
+  padding: 0 0.5em;
+  margin: 0;
+}
+
+.deliciousComboList li:hover {
+  background: #7C7C7C;
+  color: white;
+}
