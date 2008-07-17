@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>DeliciousComboBox test file</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../../public/javascripts/prototype-1.6.0.2.js" type="text/javascript"></script>
+  <script src="../../vendor/script.aculo.us/src/unittest.js" type="text/javascript"></script>
+  <script src="../../public/javascripts/delicious_combo_box.js" type="text/javascript"></script>
+  <script src="../../test/js_unit/test_helper.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../../vendor/script.aculo.us/test/test.css" type="text/css" />
+  <link rel="stylesheet" href="../../public/stylesheets/delicious_combo_box.css" type="text/css" />
+</head>
+<body>
+<h1>DeliciousComboBox test file</h1>
+<p>
+  DeliciousComboBox test description.
+</p>
+
+<div id="fixture_html">
+  <!-- HTML Fixtures -->
+  <select id="soon_to_be_a_combobox" class="delicious" name="ad_type_site_section">
+    <option value="five">five</option>
+    <option value="toaster">toaster</option>
+    <option value="Chili Cheese Bacon">Chili Cheese Bacon</option>
+    <option value="soap">soap</option>
+  </select>
+</div>
+
+<pre>
+      this.selectElement = $("soon_to_be_a_combobox")
+      this.delicious = new DeliciousComboBox(this.selectElement)
+</pre>
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+
+  new Test.Unit.Runner({
+
+    setup: function() { with(this) {
+      this.fixtureHTML = this.fixtureHTML || $('fixture_html').innerHTML;
+      this.selectElement = $("soon_to_be_a_combobox")
+      this.delicious = new DeliciousComboBox(this.selectElement)
+      this.listContainerElement = this.delicious.listContainer
+
+      this.tearUp = function() { with(this) {
+        teardown()
+        this.selectElement = $("soon_to_be_a_combobox")
+      }}
+    }},
+
+    teardown: function() { with(this) {
+      $('fixture_html').innerHTML = this.fixtureHTML;
+      // teardown code (optional)
+    }},
+
+    testDeliciousAddsAContainerAfterSelectElement: function() { with(this) {
+      var combobox = selectElement.next('div.deliciousComboBox')
+      assert(combobox)
+    }},
+
+    testDeliciousAddsAnInputBoxInContainer: function() { with(this) {
+      var combobox = selectElement.next('div.deliciousComboBox')
+      var comboinput = combobox.down('input[type=text].deliciousComboInput')
+      assert(comboinput)
+    }},
+
+    testDeliciousRemovesNameAttributeFromSelectElement: function() { with(this) {
+      tearUp()
+      assert(this.selectElement.name)
+      this.delicious = new DeliciousComboBox(this.selectElement)
+      deny(this.selectElement.name)
+    }},
+
+    testDeliciousStealsNameAttributeFromSelectElement: function() { with(this) {
+      tearUp()
+      var name = this.selectElement.name
+      this.delicious = new DeliciousComboBox(this.selectElement)
+      assert(this.delicious.combobox.name)
+      assertEqual(this.delicious.combobox.name, name)
+    }},
+
+    testDeliciousHidesSelectElement: function() { with(this) {
+      tearUp()
+      assertVisible(selectElement)
+      this.delicious = new DeliciousComboBox(this.selectElement)
+      assertNotVisible(selectElement)
+    }},
+
+    testInputGainingFocusMakesOptionListVisible: function() { with(this) {
+      assertNotVisible(listContainerElement)
+      this.delicious.combobox.focus()
+      assertVisible(listContainerElement)
+    }},
+
+    testInputLosingFocusMakesOptionListInvisible: function() { with(this) {
+      this.delicious.combobox.focus()
+      assertVisible(listContainerElement)
+      this.delicious.combobox.blur()
+      // We have to pause before we check this, since there is a timeout.
+      // There is a timeout on hiding in order to properly handle the 'click' event.
+      wait(500, assertNotVisible.curry(this.listContainerElement))
+    }},
+
+    testListItemsGetsCreatedOnInitialize: function() { with(this) {
+      assert(this.delicious.listItems)
+      assert(this.delicious.listContainer.down('ul'))
+    }},
+
+    testListItemsGetReplacedOnFocus: function() { with(this) {
+      this.delicious.combobox.focus()
+      var listItemLength = this.delicious.listContainer.descendants().size()
+      this.delicious.combobox.blur()
+      this.delicious.combobox.focus()
+
+      assertEqual(listItemLength, this.delicious.listContainer.descendants().size())
+    }},
+
+    testInputGainingFocusPopulatesInternalListFromSelectOptions: function() { with(this) {
+      this.delicious.combobox.focus()
+
+      var selectLength = selectElement.descendants().size()
+      var listItems = this.delicious.listItems.descendants()
+      assertEqual(selectLength, listItems.size())
+
+      newOption = $(document.createElement('option'))
+      newOption.writeAttribute({'value': 'OMG'})
+      newOption.update('buttes')
+      selectElement.appendChild(newOption)
+
+      this.delicious.combobox.blur()
+      this.delicious.combobox.focus()
+      assertEqual(selectLength + 1, selectElement.descendants().size())
+      assertEqual(selectElement.descendants().size(), this.delicious.listItems.descendants().size())
+    }},
+
+    testPositioningOfListContainer: function() { with(this) {
+      var inputTop = delicious.combobox.cumulativeOffset()['top'] + delicious.combobox.getHeight()
+      var inputLeft = delicious.combobox.cumulativeOffset()['left']
+
+      var listContainer = delicious.container.down('div')
+      listContainer.show()
+      assertArrayEqual([inputLeft, inputTop], listContainer.cumulativeOffset())
+      assertEqual('absolute', listContainer.getStyle('position'))
+    }},
+
+    testClickingOnAListItemPopulatesTheInputBoxText: function() { with(this) {
+      this.delicious.combobox.focus()
+      var listItem = this.delicious.listContainer.down('li')
+      fireMouseEvent(listItem, 'click')
+
+      assertEqual(listItem.innerHTML, this.delicious.combobox.value)
+    }}
+
+
+  });
+
+// ]]>
+</script>
+</body>
+</html>
