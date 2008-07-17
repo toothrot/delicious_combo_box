@@ -1,0 +1,16 @@
+= Delicious Combo Box
+  Delicious Combo Box makes it easy to turn any Select of your choosing into
+  an input that allows freeform text as well as a Select.
+ 
+== Example
+
+TODO: Example
+
+----
+(c) 2008 Centro, LLC. www.centro.net
+
+Delicious Combo Box is freely distributable under the terms of the MIT
+license.  Delicious Combo Box relies on Prototype for functionality, and 
+Script.aculo.us for unit testing.
+
+Authored by Alexander Rakoczy
