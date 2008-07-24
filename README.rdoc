@@ -11,9 +11,11 @@ Also, it's not done yet
 (c) 2008 Centro, LLC. www.centro.net
 
 Delicious Combo Box is freely distributable under the terms of the MIT
-license.  Delicious Combo Box relies on Prototype for functionality, and 
-Script.aculo.us for unit testing.
+license.  Delicious Combo Box relies on Prototype(http://www.prototypejs.org) 
+for functionality, and Script.aculo.us(http://script.aculo.us/) for unit 
+testing.
 
 The Down-arrow icon was taken from lullacons.  See lullacons-readme.txt for more information.
+http://www.lullabot.com/articles/free_gpl_icons_lullacons_pack_1
 
 Authored by Alexander Rakoczy
