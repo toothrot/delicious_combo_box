@@ -14,4 +14,6 @@ Delicious Combo Box is freely distributable under the terms of the MIT
 license.  Delicious Combo Box relies on Prototype for functionality, and 
 Script.aculo.us for unit testing.
 
+The Down-arrow icon was taken from lullacons.  See lullacons-readme.txt for more information.
+
 Authored by Alexander Rakoczy
