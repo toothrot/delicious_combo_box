@@ -49,7 +49,7 @@
                   0);       // in unsigned long charCodeArg);  
         return !element.dispatchEvent(evt);
       }
-    }, // fireMouseEvent
+    }, // fireKeyboardEvent
 
     superfreakChorus: [
       "That girl is pretty wild now",

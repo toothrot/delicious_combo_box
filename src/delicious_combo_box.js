@@ -70,7 +70,12 @@ var DeliciousComboBox = Class.create({
         }
       })
     }
-    
+  },
+
+  _completeField: function(evt) {
+    if (evt.keyCode == 13 || evt.keyCode == 9) { // enter or tab
+      this.combobox.value = this.listItems.select('li.selected').first().innerHTML
+    }
   },
 
   _setupObservers: function() {
@@ -87,8 +92,9 @@ var DeliciousComboBox = Class.create({
     this._updateListItems()
   },
 
-  _onKeydown: function() {
+  _onKeydown: function(evt) {
     this._highlightElement()
+    this._completeField(evt)
   },
 
   _onBlur: function() {

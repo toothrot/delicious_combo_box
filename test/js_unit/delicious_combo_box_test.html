@@ -174,11 +174,29 @@
 
     testTypingInStuffGivesTheSelectedClassToTheMatchingElement: function() { with(this) {
       this.delicious.combobox.focus()
-      var chili = this.delicious.listContainer.down('li', '', 3)
+      var five = this.delicious.listContainer.down('li')
       this.delicious.combobox.value = 'fiv'
       fireKeyboardEvent(this.delicious.combobox, 'keydown', 69) //'e'
 
-      assert(chili.classNames().include('selected'))
+      assert(five.classNames().include('selected'))
+    }},
+
+    testHittingEnterCompletesTheSelectedElement: function() { with(this) {
+      this.delicious.combobox.focus()
+      var five = this.delicious.listContainer.down('li')
+      this.delicious.combobox.value = 'Cheese'
+
+      fireKeyboardEvent(this.delicious.combobox, 'keydown', 13) //'enter'
+      assertEqual("Chili Cheese Bacon", this.delicious.combobox.value)
+    }},
+
+    testHittingTabCompletesTheSelectedElement: function() { with(this) {
+      this.delicious.combobox.focus()
+      var five = this.delicious.listContainer.down('li')
+      this.delicious.combobox.value = 'Cheese'
+
+      fireKeyboardEvent(this.delicious.combobox, 'keydown', 9) //'tab'
+      assertEqual("Chili Cheese Bacon", this.delicious.combobox.value)
     }}
 
   });
