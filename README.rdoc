@@ -10,7 +10,6 @@ So, this combo box does some cool stuff:
 
 Broken things:
   * The string isn't completely sanitized before being transformed into a RegExp
-  * Although it shows you which element will be completed, you have to click it
   * It doesn't yet scroll.
   * It's not smart enough to be smaller if it's near the bottom of a page
 
