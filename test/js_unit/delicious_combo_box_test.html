@@ -175,8 +175,8 @@
     testTypingInStuffGivesTheSelectedClassToTheMatchingElement: function() { with(this) {
       this.delicious.combobox.focus()
       var chili = this.delicious.listContainer.down('li', '', 3)
-      this.delicious.combobox.value = 'Cheese'
-      fireEvent(this.delicious.combobox, 'keydown')
+      this.delicious.combobox.value = 'fiv'
+      fireKeyboardEvent(this.delicious.combobox, 'keydown', 69) //'e'
 
       assert(chili.classNames().include('selected'))
     }}

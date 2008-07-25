@@ -29,6 +29,28 @@
       }
     }, // fireMouseEvent
 
+    fireKeyboardEvent: function (element,event,keyCode){
+      if (document.createEventObject) { // dispatch for IE
+        var evt = document.createEventObject();
+        return element.fireEvent('on'+event,evt)
+      } else { // dispatch for firefox + others
+        var evt = document.createEvent("KeyEvents");
+        keyCode = keyCode || 13; //enter
+        evt.initKeyEvent(
+                  event,    // in DOMString typeArg,
+                  true,     // in boolean canBubbleArg,
+                  true,     // in boolean cancelableArg,
+                  window,   // in nsIDOMAbstractView viewArg,  Specifies UIEvent.view. This value may be null.
+                  false,    // in boolean ctrlKeyArg,
+                  false,    // in boolean altKeyArg,
+                  false,    // in boolean shiftKeyArg,
+                  false,    // in boolean metaKeyArg,
+                  keyCode,  // in unsigned long keyCodeArg,
+                  0);       // in unsigned long charCodeArg);  
+        return !element.dispatchEvent(evt);
+      }
+    }, // fireMouseEvent
+
     superfreakChorus: [
       "That girl is pretty wild now",
       "The girl's a super freak",
