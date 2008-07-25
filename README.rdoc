@@ -2,10 +2,20 @@
   Delicious Combo Box makes it easy to turn any Select of your choosing into
   an input that allows freeform text as well as a Select.
  
-== Example
+== Things it Does
 
-TODO: Example
-Also, it's not done yet
+So, this combo box does some cool stuff:
+  * CSS Styling
+  * Auto-completion (non-filtering, so it doesn't make the list smaller)
+
+Broken things:
+  * The string isn't completely sanitized before being transformed into a RegExp
+  * Although it shows you which element will be completed, you have to click it
+  * It doesn't yet scroll.
+  * It's not smart enough to be smaller if it's near the bottom of a page
+
+Also, there should be an example in this document, but it's not here yet.
+
 
 ----
 (c) 2008 Centro, LLC. www.centro.net
