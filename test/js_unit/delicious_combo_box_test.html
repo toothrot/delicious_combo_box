@@ -153,8 +153,24 @@
       fireMouseEvent(listItem, 'click')
 
       assertEqual(listItem.innerHTML, this.delicious.combobox.value)
-    }}
+    }},
 
+    testHoveringAListElementGivesItSelectedClass: function() { with(this) {
+      this.delicious.combobox.focus()
+      var listItem = this.delicious.listContainer.down('li')
+      fireMouseEvent(listItem, 'mouseover')
+
+      assert(listItem.classNames().include('selected'))
+    }},
+
+    testUnHoveringAListElementGivesItSelectedClass: function() { with(this) {
+      this.delicious.combobox.focus()
+      var listItem = this.delicious.listContainer.down('li')
+      fireMouseEvent(listItem, 'mouseover')
+      fireMouseEvent(listItem, 'mouseout')
+
+      deny(listItem.classNames().include('selected'))
+    }},
 
   });
 

@@ -56,6 +56,8 @@ var DeliciousComboBox = Class.create({
 
   _setupObservers: function() {
     this.listItems.observe('click', this._onClick.bind(this))
+    this.listItems.observe('mouseover', this._onMouseover.bind(this))
+    this.listItems.observe('mouseout', this._onMouseout.bind(this))
     this.combobox.observe('focus', this._onFocus.bind(this))
     this.combobox.observe('blur', this._onBlur.bind(this))
   },
@@ -71,5 +73,13 @@ var DeliciousComboBox = Class.create({
 
   _onClick: function(evt) {
     this.combobox.value = evt.findElement('li').innerHTML
+  },
+
+  _onMouseover: function(evt) {
+    evt.findElement('li').addClassName('selected')
+  },
+
+  _onMouseout: function(evt) {
+    evt.findElement('li').removeClassName('selected')
   }
 })

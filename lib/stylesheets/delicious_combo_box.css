@@ -1,5 +1,5 @@
 .deliciousComboBox input {
-  background: url("/images/arrow_down.gif") no-repeat right;
+  background: url("../../lib/bullet-arrow-down.png") no-repeat right;
   border: 1px solid #777;
 }
 .deliciousComboList {
@@ -21,7 +21,7 @@
   margin: 0;
 }
 
-.deliciousComboList li:hover {
+.deliciousComboList li.selected {
   background: #7C7C7C;
   color: white;
 }
