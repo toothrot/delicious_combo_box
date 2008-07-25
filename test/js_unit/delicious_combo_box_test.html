@@ -172,6 +172,15 @@
       deny(listItem.classNames().include('selected'))
     }},
 
+    testTypingInStuffGivesTheSelectedClassToTheMatchingElement: function() { with(this) {
+      this.delicious.combobox.focus()
+      var chili = this.delicious.listContainer.down('li', '', 3)
+      this.delicious.combobox.value = 'Cheese'
+      fireEvent(this.delicious.combobox, 'keydown')
+
+      assert(chili.classNames().include('selected'))
+    }}
+
   });
 
 // ]]>

@@ -54,17 +54,41 @@ var DeliciousComboBox = Class.create({
     this.selectElement.hide()
   },
 
+  _highlightElement: function() {
+    var pattern = new RegExp(this.combobox.value.strip(), "i")
+    var found = false
+
+    if (this.combobox.value.length < 2) {
+      this.listItems.select('li').invoke('removeClassName', 'selected')
+    } else {
+      this.listItems.select('li').each(function(element, index) {
+        if (pattern.test(element.innerHTML) && !found) {
+          element.addClassName('selected')
+          found = true
+        } else {
+          element.removeClassName('selected')
+        }
+      })
+    }
+    
+  },
+
   _setupObservers: function() {
     this.listItems.observe('click', this._onClick.bind(this))
     this.listItems.observe('mouseover', this._onMouseover.bind(this))
     this.listItems.observe('mouseout', this._onMouseout.bind(this))
     this.combobox.observe('focus', this._onFocus.bind(this))
+    this.combobox.observe('keydown', this._onKeydown.bind(this))
     this.combobox.observe('blur', this._onBlur.bind(this))
   },
 
   _onFocus: function() {
     this.listContainer.show()
     this._updateListItems()
+  },
+
+  _onKeydown: function() {
+    this._highlightElement()
   },
 
   _onBlur: function() {
